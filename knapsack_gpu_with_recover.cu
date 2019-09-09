@@ -277,6 +277,7 @@ int main(int argc, char* argv[]) {
             p[i] = p[j];
             s[i] = s[j];
             U[i] = U[j];
+            memcpy(X + i * block_count, X + j * block_count, block_count * sizeof(*X));
             --j;
         }
         q = j + 1;
