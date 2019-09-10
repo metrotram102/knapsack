@@ -135,14 +135,14 @@ int main(int argc, char* argv[]) {
         free(L_new_set);
 
         for (ssize_t i = 0, j = 2 * q - 1; ;) {
-            while (i < 2 * q && U[i] >= record) {
+            while (i < 2 * q && U[i] > record) {
                 ++i;
             }
-            while (j >= 0 && U[j] < record) {
+            while (j >= 0 && U[j] <= record) {
                 --j;
             }
             if (i >= j) {
-                q = i;
+                q = j + 1;
                 break;
             }
             w[i] = w[j];
