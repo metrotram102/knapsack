@@ -134,25 +134,23 @@ int main(int argc, char* argv[]) {
         free(L_new);
         free(L_new_set);
 
-        ssize_t i = 0, j = 2 * q - 1;
-        while (true) {
-            while (i < 2 * q && U[i] > record) {
+        for (ssize_t i = 0, j = 2 * q - 1; ;) {
+            while (i < 2 * q && U[i] >= record) {
                 ++i;
             }
-            while (j >= 0 && U[j] <= record) {
+            while (j >= 0 && U[j] < record) {
                 --j;
             }
-            if (i >= j || i >= 2 * q || j < 0) {
+            if (i >= j) {
+                q = i;
                 break;
             }
             w[i] = w[j];
             p[i] = p[j];
             s[i] = s[j];
-            U[i] = U[j];
+            std::swap(U[i], U[j]);
             memcpy(X + i * block_count, X + j * block_count, block_count * sizeof(*X));
-            --j;
         }
-        q = j + 1;
         if (q == 0) {
             break;
         }
